@@ -1,7 +1,7 @@
 package com.example.diary.controller;
 
 import com.example.diary.domain.DiaryEntry;
-import com.example.diary.repository.DiaryEntryRepository;
+import com.example.diary.repository.JpaDiaryEntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -14,25 +14,25 @@ import java.util.List;
 public class DiaryController {
 
     @Autowired
-    DiaryEntryRepository diaryEntryRepository;
+    JpaDiaryEntryRepository jpaDiaryEntryRepository;
 
     // post 로 일기 저장
-    @PostMapping("/create/diary")
+    @PostMapping
     public DiaryEntry createDiary(@RequestBody DiaryEntry diaryEntry) {
-        return diaryEntryRepository.save(diaryEntry);
+        return jpaDiaryEntryRepository.save(diaryEntry);
     }
 
 
     // get 으로 일기 조회
-    @GetMapping("/read/diaries")
+    @GetMapping
     public List<DiaryEntry> readAllDiaries() {
-        return diaryEntryRepository.findAll();
+        return jpaDiaryEntryRepository.findAll();
     }
 
-    // get 으로 일기 조회
-    @GetMapping("/read/diary")
+    // get 으로 날짜별 일기 조회
+    @GetMapping("/read-by-date")
     public List<DiaryEntry> readDiaryByDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        return null;
+        return jpaDiaryEntryRepository.findByDate(date);
     }
 
 

@@ -10,4 +10,5 @@ public class DiaryApplication {
         SpringApplication.run(DiaryApplication.class, args);
     }
 
+
 }
