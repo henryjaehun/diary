@@ -1,1 +1,1 @@
-Self study. making diary servic.
+Self study. making diary service.
