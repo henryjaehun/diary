@@ -19,6 +19,6 @@ public class DiaryEntry {
     private LocalDate date;
     private String title;
     private String content;
-
+    private String imagePath;
 
 }

@@ -1,7 +1,7 @@
 package com.example.diary.controller;
 
 import com.example.diary.domain.DiaryEntry;
-import com.example.diary.dto.DiaryEntryUpdateRequest;
+import com.example.diary.dto.DiaryEntryRequestDto;
 import com.example.diary.repository.JpaDiaryEntryRepository;
 import com.example.diary.service.DiaryEntryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +23,8 @@ public class DiaryController {
 
     // post 로 일기 저장
     @PostMapping
-    public DiaryEntry createDiary(@RequestBody DiaryEntry diaryEntry) {
-        return jpaDiaryEntryRepository.save(diaryEntry);
+    public DiaryEntry createDiary(@ModelAttribute DiaryEntryRequestDto diaryEntryRequestDto) {
+        return diaryEntryService.createDiaryEntry(diaryEntryRequestDto);
     }
 
 
@@ -43,8 +43,8 @@ public class DiaryController {
     // 특장닐짜의 일기 수정
     @PutMapping("/update")
     void updateDiary(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
-                     @RequestBody DiaryEntryUpdateRequest diaryEntryUpdateRequest) {
-        diaryEntryService.updateDiaryEntry(date, diaryEntryUpdateRequest.getText());
+                     @RequestBody DiaryEntryRequestDto diaryEntryRequestDto) {
+        diaryEntryService.updateDiaryEntry(date, diaryEntryRequestDto.getContent());
         System.out.println("일기가 수정되었습니다. ");
     }
 
