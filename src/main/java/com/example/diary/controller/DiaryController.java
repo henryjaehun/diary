@@ -4,6 +4,7 @@ import com.example.diary.domain.DiaryEntry;
 import com.example.diary.repository.JpaDiaryEntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -33,6 +34,13 @@ public class DiaryController {
     @GetMapping("/read-by-date")
     public List<DiaryEntry> readDiaryByDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return jpaDiaryEntryRepository.findByDate(date);
+    }
+
+    @Transactional
+    @DeleteMapping("/delete")
+    public void deleteDiaryEntry(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        jpaDiaryEntryRepository.deleteByDate(date);
+        System.out.println(date + "날의 일기가 삭제 되었습니다. ");
     }
 
 

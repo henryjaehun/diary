@@ -9,4 +9,6 @@ import java.util.List;
 public interface JpaDiaryEntryRepository extends JpaRepository<DiaryEntry, Long> {
     // 날짜 별 일기조회 쿼리 추가
     List<DiaryEntry> findByDate(LocalDate date);
+
+    void deleteByDate(LocalDate date);
 }
