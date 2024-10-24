@@ -7,6 +7,7 @@ import com.example.diary.service.DiaryEntryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -28,10 +29,10 @@ public class DiaryController {
     }
 
 
-    // get 으로 일기 조회
+    // get 으로 모든 일기 조회
     @GetMapping
     public List<DiaryEntry> readAllDiaries() {
-        return jpaDiaryEntryRepository.findAll();
+        return diaryEntryService.getAllDiaryEntries();
     }
 
     // get 으로 날짜별 일기 조회
@@ -47,6 +48,17 @@ public class DiaryController {
         diaryEntryService.updateDiaryEntry(date, diaryEntryRequestDto.getContent());
         System.out.println("일기가 수정되었습니다. ");
     }
+
+
+    // 웹페이지에서 일기 보여주기
+    @GetMapping("/show")
+    public String showAllDiaries(Model model) {
+        List<DiaryEntry> entries = diaryEntryService.getAllDiaryEntries();
+        model.addAttribute("entries", entries);
+        //model.addAttribute("entries", "test");
+        return "diary";
+    }
+
 
 
     // delete 일기 삭제

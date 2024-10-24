@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Diary Entries</title>
+</head>
+<body>
+<h1>Diary Entries</h1>
+<ul>
+    <li th:each="entry : ${entries}">
+        <strong th:text="${entry.title}"></strong> - <em th:text="${entry.date}"></em>
+        <p th:text="${entry.content}"></p>
+    </li>
+</ul>
+<ul>
+    <li th:each="entry : ${entries}">
+        <p>Title: <span th:text="${entry.title}"></span></p>
+        <p>Date: <span th:text="${entry.date}"></span></p>
+        <p>Content: <span th:text="${entry.content}"></span></p>
+    </li>
+</ul>
+<h1 th:text="${entries}">asdf</h1>
+</body>
+</html>

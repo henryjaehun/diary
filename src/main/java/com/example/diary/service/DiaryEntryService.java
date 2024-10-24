@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class DiaryEntryService {
@@ -36,6 +37,7 @@ public class DiaryEntryService {
         }
     }
 
+    // 일기 생성 메소드
     public DiaryEntry createDiaryEntry(DiaryEntryRequestDto diaryEntryRequestDto) {
         String imagePath = saveImage(diaryEntryRequestDto.getImage());
 
@@ -48,6 +50,11 @@ public class DiaryEntryService {
         return jpaDiaryEntryRepository.save(diaryEntry);
     }
 
+
+    // 웹페이지에서 다이어리 보여주기위한 모든 일기 조회
+    public List<DiaryEntry> getAllDiaryEntries() {
+        return jpaDiaryEntryRepository.findAll();
+    }
 
 
     //업데이트
