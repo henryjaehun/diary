@@ -6,6 +6,7 @@ import com.example.diary.repository.JpaDiaryEntryRepository;
 import com.example.diary.service.DiaryEntryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -50,14 +51,7 @@ public class DiaryController {
     }
 
 
-    // 웹페이지에서 일기 보여주기
-    @GetMapping("/show")
-    public String showAllDiaries(Model model) {
-        List<DiaryEntry> entries = diaryEntryService.getAllDiaryEntries();
-        model.addAttribute("entries", entries);
-        //model.addAttribute("entries", "test");
-        return "diary";
-    }
+
 
 
 
