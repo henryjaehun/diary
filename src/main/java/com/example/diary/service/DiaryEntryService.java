@@ -27,7 +27,7 @@ public class DiaryEntryService {
         }
         try {
             // 서버의 특정 경로에 이미지 저장
-            String filePath = "/Users/jungjaehun/DEV/spring-study/diary_image/" + image.getOriginalFilename();
+            String filePath = "/images/" + image.getOriginalFilename();
             File dest = new File(filePath);
             image.transferTo(dest);
             return filePath;

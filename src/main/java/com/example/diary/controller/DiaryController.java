@@ -53,8 +53,6 @@ public class DiaryController {
 
 
 
-
-
     // delete 일기 삭제
     @Transactional
     @DeleteMapping("/delete")
