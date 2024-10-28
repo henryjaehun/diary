@@ -41,3 +41,8 @@ Self study. making diary service.
 반환 값이 HttpMessageConverter에 의해 json과 같은 형식으로 변환되어 전달되었던게 문제였던것 같다.
 @Controller 어노테이션을 붙여야 반환 값이 뷰의 이름으로 간주되어 ViewResolver가 서버 내의 적절한 뷰 파일을 찾아 처리한다는 걸 알게되었다.
 ### 아직 문제인 점 : 웹에서 사진은 안나옴. 
+---
+## 2024-10-27
+이미지의 저장경로를 로컬에서 프로젝트의 resources안에 static 파일 안으로 옮김.
+### 웹에서 왜 이미지가 보이지 않는지 아직 해결하지 못함
+### 요청 파라미터 취득하기

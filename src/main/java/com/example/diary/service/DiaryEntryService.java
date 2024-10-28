@@ -3,6 +3,7 @@ package com.example.diary.service;
 import com.example.diary.domain.DiaryEntry;
 import com.example.diary.dto.DiaryEntryRequestDto;
 import com.example.diary.repository.JpaDiaryEntryRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,6 +16,7 @@ import java.util.List;
 public class DiaryEntryService {
     private final JpaDiaryEntryRepository jpaDiaryEntryRepository;
 
+    @Autowired
     public DiaryEntryService(JpaDiaryEntryRepository jpaDiaryEntryRepository) {
         this.jpaDiaryEntryRepository = jpaDiaryEntryRepository;
     }
@@ -27,7 +29,7 @@ public class DiaryEntryService {
         }
         try {
             // 서버의 특정 경로에 이미지 저장
-            String filePath = "/Users/jungjaehun/DEV/spring-study/diary/src/main/resources/static/images/" + image.getOriginalFilename();
+            String filePath = "/Users/jungjaehun/DEV/spring-study/diary/src/main/resources/static/images/" + image.getOriginalFilename(); // 경로 + 파일이름
             File dest = new File(filePath);
             image.transferTo(dest);
             return filePath;
@@ -48,6 +50,11 @@ public class DiaryEntryService {
         diaryEntry.setImagePath(imagePath);
 
         return jpaDiaryEntryRepository.save(diaryEntry);
+    }
+
+    public void saveDiaryEntry(DiaryEntry diaryEntry) {
+        // DiaryEntryRepository를 통해 DB에 저장
+        jpaDiaryEntryRepository.save(diaryEntry);
     }
 
 
