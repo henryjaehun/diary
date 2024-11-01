@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DiaryEntryService {
@@ -24,19 +25,26 @@ public class DiaryEntryService {
     //업로드( 내용, 사진)
     // 이미지 파일을 저장하고 특정 경로를 반환
     public String saveImage(MultipartFile image) {
-        if (image.isEmpty() || image == null) {
-            return null;
-        }
-        try {
-            // 서버의 특정 경로에 이미지 저장
-            String filePath = "/Users/jungjaehun/DEV/spring-study/diary/src/main/resources/static/images/" + image.getOriginalFilename(); // 경로 + 파일이름
-            File dest = new File(filePath);
-            image.transferTo(dest);
-            return filePath;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return Optional.ofNullable(image) // 옵셔널 함수로 널처리 하기
+                // 이미지가 있을때만 필터링 하기
+                .filter(img -> !img.isEmpty())
+                .map(img -> {
+                    // map 은 Optional 에서 값을 변환하거나 처리할 때 주로 사용하는 메서드이다.
+                    // map 내부의 코드 블록은 Optional 내부의 값이 존재할 때만 실행된다.
+                    // map 을 사용해 MultipartFile 을 이미지 경로(String)로 변환할 수 있습니다.
+                    try {
+                        String fileName = img.getOriginalFilename();
+                        String filePath = "/images/" + fileName;  // 상대 경로 설정
+                        File dest = new File("/Users/jungjaehun/DEV/spring-study/diary/src/main/resources/static" + filePath);
+                        img.transferTo(dest);
+                        return filePath;  // 상대 경로로 반환
+                    }catch (IOException e) {
+                        e.printStackTrace();
+                        return null;
+                    }
+                })
+                .orElse(null);
+
     }
 
     // 일기 생성 메소드

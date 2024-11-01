@@ -46,3 +46,7 @@ Self study. making diary service.
 이미지의 저장경로를 로컬에서 프로젝트의 resources안에 static 파일 안으로 옮김.
 ### 웹에서 왜 이미지가 보이지 않는지 아직 해결하지 못함
 ### 요청 파라미터 취득하기
+---
+## 2024-11-01
+일기 생성할 때 입력 image 값이 없을때의 null 처리를 Optional 함수를 사용하여 처리함.
+return Optional.ofNullable(image) 
